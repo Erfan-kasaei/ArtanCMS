@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
+import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const myLocalFont = localFont({
+  src: "./assets/fonts/YekanBakhFaNum-VF.ttf",
+  variable: "--font-my-local",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        dir="rtl"
+        className={`${myLocalFont.variable} antialiased text-slate-50 bg-slate-900 font-my-local`}
       >
-        {children}
+        <Header />
+        <main className="flex-grow p-4">{children}</main>
+        <Footer />
       </body>
     </html>
   );

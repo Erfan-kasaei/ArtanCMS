@@ -47,7 +47,7 @@ export default function EditContentForm({
   return (
     <form
       onSubmit={handleUpdate}
-      className="space-y-4 p-4 border rounded-lg shadow bg-white"
+      className="space-y-4 p-4 border rounded-lg shadow bg-slate-200 text-slate-800"
     >
       <h2 className="text-lg font-bold">ویرایش محتوا</h2>
 

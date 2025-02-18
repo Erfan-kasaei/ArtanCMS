@@ -41,7 +41,7 @@ export default function AddContentForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg shadow bg-white">
+    <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg bg-slate-200 text-slate-800">
       <h2 className="text-lg font-bold">افزودن محتوا</h2>
 
       <Input
