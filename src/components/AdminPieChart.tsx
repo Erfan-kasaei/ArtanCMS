@@ -1,6 +1,20 @@
-import { PieChart, Pie, Cell, Tooltip } from 'recharts';
+import { TrendingUp } from "lucide-react";
+import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
-const COLORS = ['#10B981', '#EF4444']; // سبز برای افزوده شده، قرمز برای حذف شده
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
 type AdminPieChartProps = {
   addedToday: number;
@@ -8,32 +22,70 @@ type AdminPieChartProps = {
 };
 
 export default function AdminPieChart({ addedToday, deletedToday }: AdminPieChartProps) {
-  const data = [
-    { name: 'افزوده شده', value: addedToday },
-    { name: 'حذف شده', value: deletedToday },
+  const totalPosts = addedToday + deletedToday;
+  const chartData = [
+    { name: "افزوده شده", value: addedToday, color: "#10B981" },
+    { name: "حذف شده", value: deletedToday, color: "#EF4444" },
   ];
-  
+
+  const chartConfig: ChartConfig = {
+    added: {
+      label: "افزوده شده",
+      color: "#10B981",
+    },
+    deleted: {
+      label: "حذف شده",
+      color: "#EF4444",
+    },
+  };
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white shadow-md rounded-lg">
-      <h2 className="text-lg font-semibold mb-2">نمودار پست‌های امروز</h2>
-      <PieChart width={300} height={300}>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          innerRadius={60}
-          outerRadius={100}
-          fill="#8884d8"
-          dataKey="value"
-          label
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-      </PieChart>
-    </div>
+    <Card className="flex flex-col">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>📊 نمودار پست‌های امروز</CardTitle>
+        <CardDescription>نمایش پست‌های افزوده و حذف‌شده امروز</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-1 items-center pb-0">
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square w-full max-w-[250px]">
+          <RadialBarChart data={chartData} endAngle={180} innerRadius={80} outerRadius={130}>
+            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle">
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) - 16}
+                          className="fill-foreground text-2xl font-bold"
+                        >
+                          {totalPosts.toLocaleString()}
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 4}
+                          className="fill-muted-foreground"
+                        >
+                          پست‌ها
+                        </tspan>
+                      </text>
+                    );
+                  }
+                }}
+              />
+            </PolarRadiusAxis>
+            <RadialBar dataKey="value" stackId="a" cornerRadius={5} fill={chartData[0].color} className="stroke-transparent stroke-2" />
+            <RadialBar dataKey="value" fill={chartData[1].color} stackId="a" cornerRadius={5} className="stroke-transparent stroke-2" />
+          </RadialBarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          افزایش روند امروز <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground">نمایش درصد تغییرات امروز</div>
+      </CardFooter>
+    </Card>
   );
 }
