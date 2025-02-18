@@ -14,15 +14,15 @@ export default function StatsOverview({ stats }: { stats: AdminStats | null }) {
     <div className="grid grid-cols-3 gap-4">
       {stats ? (
         <>
-          <Card className="p-4">
+          <Card className="p-4 bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
             <h2 className="text-lg font-semibold">کل پست‌ها</h2>
             <p className="text-2xl">{stats.totalPosts}</p>
           </Card>
-          <Card className="p-4">
+          <Card className="p-4 bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
             <h2 className="text-lg font-semibold">افزوده‌شده امروز</h2>
             <p className="text-2xl text-green-500">{stats.addedToday}</p>
           </Card>
-          <Card className="p-4">
+          <Card className="p-4 bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
             <h2 className="text-lg font-semibold">حذف‌شده امروز</h2>
             <p className="text-2xl text-red-500">{stats.deletedToday}</p>
           </Card>

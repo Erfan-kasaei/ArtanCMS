@@ -25,7 +25,7 @@ type TrendLineChartProps = {
 
 export default function TrendLineChart({ trendData }: TrendLineChartProps) {
   return (
-    <Card className="p-4">
+    <Card className="p-4 bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
       <CardHeader className="items-center pb-0">
         <CardTitle>📉 روند تغییرات در ۷ روز اخیر</CardTitle>
         <CardDescription>
@@ -34,7 +34,7 @@ export default function TrendLineChart({ trendData }: TrendLineChartProps) {
       </CardHeader>
       <CardContent>
         {trendData ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={80}>
             <LineChart data={trendData}>
               <XAxis dataKey="date" />
               <YAxis />
@@ -47,14 +47,6 @@ export default function TrendLineChart({ trendData }: TrendLineChartProps) {
           <Skeleton className="h-40 w-full" />
         )}
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          تغییرات هفتگی <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          نمایش روند تغییرات پست‌ها در هفته اخیر
-        </div>
-      </CardFooter>
     </Card>
   );
 }
