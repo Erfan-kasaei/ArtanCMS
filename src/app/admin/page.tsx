@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AdminPieChart from "@/components/AdminPieChart";
-import ActivityBarChart from "@/components/ActivityBarChart";
+// import ActivityBarChart from "@/components/ActivityBarChart";
 import TrendLineChart from "@/components/TrendLineChart";
 import StatsOverview from "@/components/StatsOverview";
 
@@ -30,7 +30,7 @@ export default function AdminPanel() {
     <main className="p-6 max-w-4xl mx-auto space-y-6">
       <h1 className="text-xl font-bold text-center">📊 داشبورد ادمین</h1>
       <StatsOverview stats={stats} />
-      <ActivityBarChart stats={stats} />
+      {/* <ActivityBarChart stats={stats} /> */}
       <TrendLineChart trendData={trendData} />
       <AdminPieChart
         addedToday={stats?.addedToday || 0}
