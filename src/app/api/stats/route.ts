@@ -10,11 +10,17 @@ export async function GET() {
     const addedToday = await prisma.content.count({
       where: { createdAt: { gte: today } },
     });
+    const totalDeleted = await prisma.deletedContent.count();
     const deletedToday = await prisma.deletedContent.count({
       where: { deletedAt: { gte: today } },
     });
 
-    return NextResponse.json({ totalPosts, addedToday, deletedToday });
+    return NextResponse.json({
+      totalPosts,
+      addedToday,
+      deletedToday,
+      totalDeleted,
+    });
   } catch (error) {
     return NextResponse.json({ error: "خطا در دریافت آمار" }, { status: 500 });
   }
