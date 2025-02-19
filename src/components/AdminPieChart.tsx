@@ -43,7 +43,7 @@ export default function AdminPieChart({
   };
 
   return (
-    <Card className="flex flex-col bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
+    <Card className="flex flex-col bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
       <CardHeader className="items-center pb-0">
         <CardTitle>📊 نمودار پست‌های امروز</CardTitle>
         <CardDescription>نمایش پست‌های افزوده و حذف‌شده امروز</CardDescription>

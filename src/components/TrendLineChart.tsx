@@ -22,7 +22,7 @@ const chartConfig = {
 
 export default function TrendLineChart({ trendData }: TrendLineChartProps) {
   return (
-    <Card className="p-2 bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
+    <Card className="p-2 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
       <CardHeader className="items-end -mt-4">
         <CardTitle className="text-xs font-light">
           روند افزودن محتوا در هفته اخیر
