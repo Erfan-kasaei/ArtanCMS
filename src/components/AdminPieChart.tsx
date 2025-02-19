@@ -34,6 +34,7 @@ export default function AdminPieChart({
             innerRadius={50}
             outerRadius={90}
             dataKey="value"
+            stroke="false"
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index]} />

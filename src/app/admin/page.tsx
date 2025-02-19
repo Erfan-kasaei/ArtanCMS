@@ -55,7 +55,7 @@ export default function AdminPanel() {
                   title="افزوده شده امروز"
                   value={stats?.addedToday ?? 0}
                   total={stats?.totalPosts ?? 1}
-                  colors={["#4CAF50", "#E0E0E0"]}
+                  colors={["#BF2EF0", "#2A004E"]}
                 />
               </div>
               <div className="mt-4">
@@ -63,7 +63,7 @@ export default function AdminPanel() {
                   title="حذف شده امروز"
                   value={stats?.deletedToday ?? 0}
                   total={stats?.totalPosts ?? 1}
-                  colors={["#F44336", "#E0E0E0"]}
+                  colors={["#D91656", "#3E001F"]}
                 />
               </div>
             </div>
