@@ -69,19 +69,19 @@ export default function ActivityBarChart({
             />
             <Bar
               dataKey="added"
-              fill="#34d399" // رنگ سبز برای افزوده‌شده
+              fill="#009990" // رنگ سبز برای افزوده‌شده
               radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
               animationDuration={1500} // انیمیشن
             />
             <Bar
               dataKey="deleted"
-              fill="#ef4444" // رنگ قرمز برای حذف‌شده
+              fill="#D91656" // رنگ قرمز برای حذف‌شده
               radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
               animationDuration={1500} // انیمیشن
             />
             <Bar
               dataKey="total"
-              fill="#3b82f6" // رنگ آبی برای کل پست‌ها
+              fill="#BF2EF0" // رنگ آبی برای کل پست‌ها
               radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
               animationDuration={1500} // انیمیشن
             />

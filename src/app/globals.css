@@ -27,7 +27,7 @@ body {
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
+    --chart-1: 347 77% 50%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
@@ -70,4 +70,13 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+.menu_button {
+  @apply flex flex-nowrap justify-between items-center p-3;
+}
+.menu_button2 {
+  @apply py-4 px-6 flex items-center gap-3 hover:bg-black/60 duration-300 rounded-lg;
+}
+.hover_button {
+  @apply hover:text-slate-300;
 }

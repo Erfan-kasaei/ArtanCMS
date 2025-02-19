@@ -29,7 +29,7 @@ export default function AdminPanel() {
   }, []);
 
   return (
-    <main className="p-6 w-full mx-auto space-y-6">
+    <main className="px-6 w-full mx-auto space-y-6">
       <div className="flex flex-nowrap justify-between">
         <div className="w-1/6 mt-20">
           <Sidebar />

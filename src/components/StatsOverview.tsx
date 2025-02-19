@@ -17,21 +17,21 @@ export default function StatsOverview({ stats }: { stats: AdminStats | null }) {
       {stats ? (
         <>
           <Card className="p-4 grid grid-cols-3 gap-4 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
-            <div className="flex flex-nowrap justify-between items-center border-l border-slate-400/40 h-auto p-3">
+            <div className="menu_button border-l border-slate-400/40 h-auto">
               <LuArchive className="text-3xl text-slate-500" />
               <h2 className="text-lg font-light">کل پست‌ها</h2>
               <p className="text-sm text-slate-950 bg-sky-400 rounded-full p-1 ml-3">
                 {stats.totalPosts + stats.totalDeleted}
               </p>
             </div>
-            <div className="flex flex-nowrap justify-between items-center border-l border-slate-400/40 h-auto p-3">
+            <div className="menu_button border-l border-slate-400/40 h-auto">
               <LuArchiveRestore className="text-3xl text-slate-500" />
               <h2 className="text-lg font-light">افزوده‌شده</h2>
               <p className="text-sm text-slate-950 bg-sky-400 rounded-full p-1 ml-3">
                 {stats.totalPosts}
               </p>
             </div>
-            <div className="flex flex-nowrap justify-between items-center p-3">
+            <div className="menu_button">
               <LuArchiveX className="text-3xl text-slate-500" />
               <h2 className="text-lg font-light">حذف‌شده</h2>
               <p className="text-sm text-slate-950 bg-sky-400 rounded-full p-1">
