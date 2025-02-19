@@ -14,9 +14,9 @@ type TrendLineChartProps = {
 };
 
 const chartConfig = {
-  added: {
-    label: "Added",
-    color: "hsl(var(--chart-6))",
+  deleted: {
+    label: "Deleted",
+    color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
@@ -25,7 +25,7 @@ export default function TrendLineChart({ trendData }: TrendLineChartProps) {
     <Card className="p-2 bg-slate-950/40 border-none shadow-white/10 shadow-2xl text-slate-50">
       <CardHeader className="items-end -mt-4">
         <CardTitle className="text-xs font-light">
-          روند افزودن محتوا در هفته اخیر
+          روند حذف محتوا در هفته اخیر
         </CardTitle>
       </CardHeader>
       <CardContent className="-ml-12 text-xs">
@@ -52,12 +52,13 @@ export default function TrendLineChart({ trendData }: TrendLineChartProps) {
                 cursor={false}
                 content={<ChartTooltipContent indicator="dot" hideLabel />}
               />
+
               <Area
-                dataKey="added"
+                dataKey="deleted"
                 type="linear"
-                fill="var(--color-added)"
+                fill="var(--color-deleted)"
                 fillOpacity={0.6}
-                stroke="var(--color-added)"
+                stroke="var(--color-deleted)"
               />
             </AreaChart>
           </ChartContainer>

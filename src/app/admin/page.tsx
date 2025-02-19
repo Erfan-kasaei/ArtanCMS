@@ -6,6 +6,7 @@ import ActivityBarChart from "@/components/ActivityBarChart";
 import TrendLineChart from "@/components/TrendLineChart";
 import StatsOverview from "@/components/StatsOverview";
 import Sidebar from "@/components/Sidebar";
+import TrendLineChartDeleted from "@/components/TrendLineChartDeleted";
 
 export default function AdminPanel() {
   const [stats, setStats] = useState<AdminStats | null>(null);
@@ -15,6 +16,7 @@ export default function AdminPanel() {
     totalPosts: number;
     addedToday: number;
     deletedToday: number;
+    totalDeleted: number;
   };
 
   useEffect(() => {
@@ -45,12 +47,12 @@ export default function AdminPanel() {
                 deletedToday={stats?.deletedToday || 0}
               />
             </div>
-            <div className=" flex flex-col h-32">
+            <div className=" flex flex-col">
               <div>
                 <TrendLineChart trendData={trendData} />
               </div>
               <div className="mt-4">
-                <TrendLineChart trendData={trendData} />
+                <TrendLineChartDeleted trendData={trendData} />
               </div>
             </div>
           </div>
