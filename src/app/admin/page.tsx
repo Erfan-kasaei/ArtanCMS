@@ -58,8 +58,8 @@ export default function AdminPanel() {
 
             {/* Pie Charts and Bar Chart: نمودارهای دایره‌ای و میله‌ای */}
             <div className="space-y-4">
-              <div className="flex flex-col md:flex-row justify-center items-center bg-slate-950/40 shadow-sky-700/20 shadow-2xl text-slate-50 rounded-xl p-4">
-                <div className="w-full md:w-1/2">
+              <div className="flex flex-col lg:flex-row justify-center items-center bg-slate-950/40 shadow-sky-700/20 shadow-2xl text-slate-50 rounded-xl p-4">
+                <div className="w-full lg:w-1/2">
                   <AdminPieChart
                     title="افزوده شده امروز"
                     value={stats?.addedToday ?? 0}
@@ -67,7 +67,7 @@ export default function AdminPanel() {
                     colors={["#BF2EF0", "#2A004E"]}
                   />
                 </div>
-                <div className="w-full md:w-1/2 mt-4 md:mt-0">
+                <div className="w-full lg:w-1/2 mt-4 md:mt-0">
                   <AdminPieChart
                     title="حذف شده امروز"
                     value={stats?.deletedToday ?? 0}
