@@ -6,24 +6,46 @@ import {
   LuPower,
 } from "react-icons/lu";
 
+// کامپوننت Sidebar: نوار کناری برای دسترسی به بخش‌های مختلف
 export default function Sidebar() {
   return (
-    <div className="h-auto flex flex-col max-md:flex-row gap-4 rounded-xl text-zinc-300 md:py-12 pl-5 ml-3">
-      <Link href="/" className="menu_button2 md:border-b border-b-slate-600">
-        <LuHouse className="text-2xl mr-5" />
-        <span className="text-sm md:mr-7 max-md:hidden">خانه</span>
+    <div className="flex flex-row md:flex-col gap-4 rounded-xl text-zinc-300 md:py-12 px-5 md:pl-5 md:ml-3 justify-center md:justify-start">
+      {/* لینک به صفحه اصلی */}
+      <Link
+        href="/"
+        className="menu_button2 md:border-b border-b-slate-600 flex items-center"
+      >
+        <LuHouse className="text-2xl" /> {/* آیکون خانه */}
+        <span className="text-sm ml-2 md:ml-5 hidden lg:inline">خانه</span>{" "}
+        {/* متن خانه */}
       </Link>
-      <Link href="/admin" className="menu_button2 md:border-b border-b-slate-600">
-        <LuLayoutDashboard className="text-2xl md:mr-5" />
-        <span className="text-sm mr-7 max-md:hidden">داشبورد</span>
+
+      {/* لینک به صفحه داشبورد */}
+      <Link
+        href="/admin"
+        className="menu_button2 md:border-b border-b-slate-600 flex items-center"
+      >
+        <LuLayoutDashboard className="text-2xl" /> {/* آیکون داشبورد */}
+        <span className="text-sm ml-2 md:ml-5 hidden lg:inline">
+          داشبورد
+        </span>{" "}
+        {/* متن داشبورد */}
       </Link>
-      <div className="menu_button2 md:border-b border-b-slate-600">
-        <LuNewspaper className="text-2xl md:mr-5" />
-        <span className="text-sm mr-7 max-md:hidden">اخبار</span>
+
+      {/* بخش اخبار (بدون لینک) */}
+      <div className="menu_button2 md:border-b border-b-slate-600 flex items-center">
+        <LuNewspaper className="text-2xl" /> {/* آیکون اخبار */}
+        <span className="text-sm ml-2 md:ml-5 hidden lg:inline">
+          اخبار
+        </span>{" "}
+        {/* متن اخبار */}
       </div>
-      <div className="menu_button2">
-        <LuPower className="text-2xl md:mr-5" />
-        <span className="text-sm mr-7 max-md:hidden">خروج</span>
+
+      {/* بخش خروج (بدون لینک) */}
+      <div className="menu_button2 flex items-center">
+        <LuPower className="text-2xl text-red-400" /> {/* آیکون خروج */}
+        <span className="text-sm ml-2 md:ml-5 hidden lg:inline">خروج</span>{" "}
+        {/* متن خروج */}
       </div>
     </div>
   );

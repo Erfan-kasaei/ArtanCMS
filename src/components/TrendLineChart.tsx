@@ -1,4 +1,5 @@
 "use client";
+
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -9,28 +10,32 @@ import {
 } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// تعریف Props برای کامپوننت
 type TrendLineChartProps = {
-  trendData: { date: string; added: number; deleted: number }[] | null;
-  type: "added" | "deleted";
-  height?: number; // ارتفاع قابل تنظیم
+  trendData: { date: string; added: number; deleted: number }[] | null; // داده‌های روند
+  type: "added" | "deleted"; // نوع نمودار (افزوده‌شده یا حذف‌شده)
+  height?: number; // ارتفاع قابل تنظیم نمودار
 };
 
+// تنظیمات نمودار بر اساس نوع
 const chartConfig = {
   added: {
-    label: "Added",
-    color: "hsl(var(--chart-6))",
+    label: "Added", // برچسب برای افزوده‌شده
+    color: "hsl(var(--chart-6))", // رنگ نمودار
   },
   deleted: {
-    label: "Deleted",
-    color: "hsl(var(--chart-1))",
+    label: "Deleted", // برچسب برای حذف‌شده
+    color: "hsl(var(--chart-1))", // رنگ نمودار
   },
 } satisfies ChartConfig;
 
+// کامپوننت TrendLineChart: نمایش نمودار روند افزوده‌ها یا حذف‌ها
 export default function TrendLineChart({
   trendData,
   type,
-  height = 200, // مقدار پیش‌فرض برای ارتفاع
+  height = 200, // ارتفاع پیش‌فرض
 }: TrendLineChartProps) {
+  // عنوان نمودار بر اساس نوع
   const title =
     type === "added"
       ? "روند افزودن محتوا در هفته اخیر"
@@ -38,11 +43,15 @@ export default function TrendLineChart({
 
   return (
     <Card className="p-2 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50 h-80">
+      {/* عنوان نمودار */}
       <CardHeader className="-mt-4">
         <CardTitle className="text-xs font-light text-right">{title}</CardTitle>
       </CardHeader>
+
+      {/* محتوای نمودار */}
       <CardContent className="-ml-12 text-xs h-[${height}px]">
         {trendData ? (
+          // اگر داده‌ها وجود داشته باشند، نمودار نمایش داده می‌شود
           <ChartContainer config={chartConfig}>
             <AreaChart
               width={500}
@@ -55,30 +64,40 @@ export default function TrendLineChart({
               }}
               style={{ height }}
             >
+              {/* خطوط شبکه‌ای */}
               <CartesianGrid vertical={false} />
+
+              {/* محور X: نمایش تاریخ‌ها */}
               <XAxis
                 dataKey="date"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 10)}
+                tickFormatter={(value) => value.slice(0, 10)} // فرمت تاریخ
               />
+
+              {/* محور Y: نمایش مقادیر */}
               <YAxis />
+
+              {/* Tooltip: نمایش اطلاعات هنگام hover روی نمودار */}
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="dot" hideLabel />}
               />
+
+              {/* Area: نمایش داده‌ها به صورت نمودار */}
               <Area
                 dataKey={type}
                 type="linear"
-                fill={`var(--color-${type})`}
-                fillOpacity={0.6}
-                stroke={`var(--color-${type})`}
+                fill={`var(--color-${type})`} // رنگ پر کردن
+                fillOpacity={0.6} // شفافیت پر کردن
+                stroke={`var(--color-${type})`} // رنگ خط
               />
             </AreaChart>
           </ChartContainer>
         ) : (
-          <Skeleton className="w-full" style={{ height: `${height}px` }} /> // تنظیم ارتفاع Skeleton
+          // اگر داده‌ها وجود نداشته باشند، اسکلتون نمایش داده می‌شود
+          <Skeleton className="w-full" style={{ height: `${height}px` }} />
         )}
       </CardContent>
     </Card>
