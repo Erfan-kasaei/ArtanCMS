@@ -44,7 +44,7 @@ export default function ActivityBarChart({
     <Card className="p-4 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
       <h2 className="text-sm font-light text-right mb-4">گزارش فعالیت</h2>
       {stats ? (
-        <ResponsiveContainer width="100%" height={370}>
+        <ResponsiveContainer width="100%" height={340}>
           <BarChart
             data={chartData}
             margin={{

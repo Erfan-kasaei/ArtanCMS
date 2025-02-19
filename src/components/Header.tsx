@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LuLayoutDashboard, LuHouse, LuUser } from "react-icons/lu";
 export default function Header() {
   return (
-    <header className="p-4 px-12 mt-3 text-center font-extralight">
+    <header className="p-4 px-12 mt-3 text-center font-extralight max-md:hidden">
       <div className="flex flex-nowrap justify-between">
         <div className="mr-2 flex flex-nowrap gap-5">
           <span className="bg-rose-700 w-8 h-8 rounded-full pt-1 text-xl">

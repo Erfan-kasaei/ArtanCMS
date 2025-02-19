@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   return (
-    <main className="p-6 mt-10 mx-10 grid grid-cols-2 gap-10 max-md:grid-cols-1">
+    <main className="md:p-6 mt-10 md:mx-10 grid grid-cols-2 gap-10 max-md:grid-cols-1">
       <div className="md:sticky top-4 max-h-screen overflow-y-auto">
         <AddContentForm />
       </div>
@@ -60,11 +60,11 @@ export default function Home() {
                     <h2 className="font-semibold text-lg text-gray-900">
                       {content.title}
                     </h2>
-                    <p className="text-xs ml-3 text-gray-500">
+                    <p className="text-xs ml-3 text-gray-500 ">
                       {new Date(content.createdAt).toLocaleDateString("fa-IR")}
                     </p>
                   </div>
-                  <p className="text-sm text-gray-700">{content.description}</p>
+                  <p className="text-sm text-gray-700 line-clamp-3">{content.description}</p>
                   <div className="mt-2 flex gap-2 justify-end">
                     <Button onClick={() => setEditingContent(content)}>
                       <FaRegEdit />
