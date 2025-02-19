@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         dir="rtl"
-        className={`${myLocalFont.variable} antialiased text-slate-50 bg-slate-900 font-my-local`}
+        className={`${myLocalFont.variable} antialiased text-slate-50 bg-slate-900 font-my-local h-[100vh]`}
       >
         <Header />
         <main className="flex-grow p-4">{children}</main>

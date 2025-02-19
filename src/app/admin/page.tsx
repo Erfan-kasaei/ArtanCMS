@@ -69,7 +69,7 @@ export default function AdminPanel() {
                   <AdminPieChart
                     title="حذف شده امروز"
                     value={stats?.deletedToday ?? 0}
-                    total={stats?.totalPosts ?? 1}
+                    total={stats?.totalDeleted ?? 1}
                     colors={["#D91656", "#3E001F"]}
                   />
                 </div>
