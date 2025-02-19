@@ -11,6 +11,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 type TrendLineChartProps = {
   trendData: { date: string; added: number; deleted: number }[] | null;
+  type: "added" | "deleted";
+  height?: number; // ارتفاع قابل تنظیم
 };
 
 const chartConfig = {
@@ -18,26 +20,40 @@ const chartConfig = {
     label: "Added",
     color: "hsl(var(--chart-6))",
   },
+  deleted: {
+    label: "Deleted",
+    color: "hsl(var(--chart-1))",
+  },
 } satisfies ChartConfig;
 
-export default function TrendLineChart({ trendData }: TrendLineChartProps) {
+export default function TrendLineChart({
+  trendData,
+  type,
+  height = 200, // مقدار پیش‌فرض برای ارتفاع
+}: TrendLineChartProps) {
+  const title =
+    type === "added"
+      ? "روند افزودن محتوا در هفته اخیر"
+      : "روند حذف محتوا در هفته اخیر";
+
   return (
-    <Card className="p-2 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
-      <CardHeader className="items-end -mt-4">
-        <CardTitle className="text-xs font-light">
-          روند افزودن محتوا در هفته اخیر
-        </CardTitle>
+    <Card className="p-2 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50 h-80">
+      <CardHeader className="-mt-4">
+        <CardTitle className="text-xs font-light text-right">{title}</CardTitle>
       </CardHeader>
-      <CardContent className="-ml-12 text-xs">
+      <CardContent className="-ml-12 text-xs h-[${height}px]">
         {trendData ? (
           <ChartContainer config={chartConfig}>
             <AreaChart
+              width={500}
+              height={height}
               accessibilityLayer
               data={trendData}
               margin={{
                 left: 12,
                 right: 12,
               }}
+              style={{ height }}
             >
               <CartesianGrid vertical={false} />
               <XAxis
@@ -53,16 +69,16 @@ export default function TrendLineChart({ trendData }: TrendLineChartProps) {
                 content={<ChartTooltipContent indicator="dot" hideLabel />}
               />
               <Area
-                dataKey="added"
+                dataKey={type}
                 type="linear"
-                fill="var(--color-added)"
+                fill={`var(--color-${type})`}
                 fillOpacity={0.6}
-                stroke="var(--color-added)"
+                stroke={`var(--color-${type})`}
               />
             </AreaChart>
           </ChartContainer>
         ) : (
-          <Skeleton className="h-40 w-full" />
+          <Skeleton className="w-full" style={{ height: `${height}px` }} /> // تنظیم ارتفاع Skeleton
         )}
       </CardContent>
     </Card>

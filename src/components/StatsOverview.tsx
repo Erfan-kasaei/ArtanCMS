@@ -16,7 +16,7 @@ export default function StatsOverview({ stats }: { stats: AdminStats | null }) {
     <div>
       {stats ? (
         <>
-          <Card className="p-4 grid grid-cols-3 gap-4 bg-slate-900 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
+          <Card className="p-4 grid grid-cols-3 gap-4 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
             <div className="flex flex-nowrap justify-between items-center border-l border-slate-400/40 h-auto p-3">
               <LuArchive className="text-3xl text-slate-500" />
               <h2 className="text-lg font-light">کل پست‌ها</h2>

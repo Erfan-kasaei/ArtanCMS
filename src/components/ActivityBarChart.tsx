@@ -9,6 +9,7 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  CartesianGrid,
 } from "recharts";
 
 type AdminStats = {
@@ -32,16 +33,58 @@ export default function ActivityBarChart({
 
   return (
     <Card className="p-4 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50">
-      <h2 className="text-lg font-semibold text-center">📈 گزارش فعالیت</h2>
+      <h2 className="text-sm font-light text-right mb-4">گزارش فعالیت</h2>
       {stats ? (
-        <ResponsiveContainer width="100%" height={570}>
-          <BarChart data={chartData}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="added" fill="#34d399" />
-            <Bar dataKey="deleted" fill="#ef4444" />
-            <Bar dataKey="total" fill="#3b82f6" />
+        <ResponsiveContainer width="100%" height={370}>
+          <BarChart
+            data={chartData}
+            margin={{
+              top: 20,
+              right: 35,
+              left: 0,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="rgba(255, 255, 255, 0.1)"
+            />
+            {/* خطوط شبکه‌ای */}
+            <XAxis
+              dataKey="name"
+              stroke="rgba(255, 255, 255, 0.5)" // رنگ محور X
+              tick={{ fill: "rgba(255, 255, 255, 0.7)" }} // رنگ متن محور X
+            />
+            <YAxis
+              stroke="rgba(255, 255, 255, 0.5)" // رنگ محور Y
+              tick={{ fill: "rgba(255, 255, 255, 0.7)" }} // رنگ متن محور Y
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: "8px",
+                color: "#fff",
+              }} // استایل Tooltip
+            />
+            <Bar
+              dataKey="added"
+              fill="#34d399" // رنگ سبز برای افزوده‌شده
+              radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
+              animationDuration={1500} // انیمیشن
+            />
+            <Bar
+              dataKey="deleted"
+              fill="#ef4444" // رنگ قرمز برای حذف‌شده
+              radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
+              animationDuration={1500} // انیمیشن
+            />
+            <Bar
+              dataKey="total"
+              fill="#3b82f6" // رنگ آبی برای کل پست‌ها
+              radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
+              animationDuration={1500} // انیمیشن
+            />
           </BarChart>
         </ResponsiveContainer>
       ) : (
