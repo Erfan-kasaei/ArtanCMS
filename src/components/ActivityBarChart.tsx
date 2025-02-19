@@ -16,6 +16,7 @@ type AdminStats = {
   totalPosts: number;
   addedToday: number;
   deletedToday: number;
+  totalDeleted: number;
 };
 
 export default function ActivityBarChart({
@@ -25,9 +26,17 @@ export default function ActivityBarChart({
 }) {
   const chartData = stats
     ? [
-        { name: "افزوده‌شده", added: stats.addedToday },
-        { name: "حذف‌شده", deleted: stats.deletedToday },
-        { name: "کل پست‌ها", total: stats.totalPosts },
+        { name: "امروز", added_today: stats.addedToday },
+        { name: "افزوده‌شده", added: stats.totalPosts },
+
+        { name: "امروز", deleted_today: stats.deletedToday },
+        { name: "حذف‌شده", deleted: stats.totalDeleted },
+
+        {
+          name: "امروز",
+          total_today: stats.addedToday + stats.deletedToday,
+        },
+        { name: "کل پست‌ها", total: stats.totalPosts + stats.totalDeleted },
       ]
     : [];
 
@@ -74,14 +83,32 @@ export default function ActivityBarChart({
               animationDuration={1500} // انیمیشن
             />
             <Bar
+              dataKey="added_today"
+              fill="#009110" // رنگ سبز برای افزوده‌شده
+              radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
+              animationDuration={1500} // انیمیشن
+            />
+            <Bar
               dataKey="deleted"
               fill="#D91656" // رنگ قرمز برای حذف‌شده
+              radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
+              animationDuration={1500} // انیمیشن
+            />{" "}
+            <Bar
+              dataKey="deleted_today"
+              fill="#D91116" // رنگ قرمز برای حذف‌شده
               radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
               animationDuration={1500} // انیمیشن
             />
             <Bar
               dataKey="total"
               fill="#BF2EF0" // رنگ آبی برای کل پست‌ها
+              radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
+              animationDuration={1500} // انیمیشن
+            />
+            <Bar
+              dataKey="total_today"
+              fill="#BF11F0" // رنگ آبی برای کل پست‌ها
               radius={[4, 4, 0, 0]} // گوشه‌های گرد برای Bar
               animationDuration={1500} // انیمیشن
             />

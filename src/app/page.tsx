@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <main className="p-6 mt-10 mx-10 grid grid-cols-2 gap-10 max-md:grid-cols-1">
-      <div>
+      <div className="md:sticky top-4 max-h-screen overflow-y-auto">
         <AddContentForm />
       </div>
 
