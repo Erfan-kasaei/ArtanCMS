@@ -9,12 +9,12 @@ export async function GET() {
     today.setHours(0, 0, 0, 0); // شروع امروز (نیمه‌شب)
 
     // آرایه‌ای برای ذخیره‌ی داده‌های روند
-    let trendData = [];
+    const trendData = [];
 
     // حلقه برای محاسبه‌ی آمار هر روز در ۷ روز اخیر
     for (let i = 6; i >= 0; i--) {
       // محاسبه‌ی تاریخ روز مورد نظر
-      let date = new Date(today);
+      const date = new Date(today);
       date.setDate(today.getDate() - i);
 
       // تعداد محتواهای اضافه‌شده در روز مورد نظر
@@ -47,7 +47,7 @@ export async function GET() {
 
     // ارسال داده‌های روند به عنوان پاسخ
     return NextResponse.json(trendData);
-  } catch (error) {
+  } catch {
     // در صورت بروز خطا، پیام خطا برگردانده می‌شود
     return NextResponse.json(
       { error: "خطا در دریافت روند آمار" },

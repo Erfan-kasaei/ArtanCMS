@@ -6,44 +6,52 @@ import EditContentForm from "@/components/EditContentForm";
 
 // تعریف نوع داده‌های محتوا
 type Content = {
-  id: string; // شناسه‌ی محتوا
-  title: string; // عنوان محتوا
-  description?: string; // توضیحات محتوا (اختیاری)
-  createdAt: string; // تاریخ ایجاد محتوا
+  id: string;
+  title: string;
+  description?: string;
+  createdAt: string;
 };
 
 // تعریف Props برای کامپوننت
 type ContentListProps = {
-  contents: Content[]; // لیست محتواها
-  onDelete: (id: string) => void; // تابع حذف محتوا
+  contents: Content[];
+  onDelete: (id: string) => void;
+  onUpdateContent: (updatedContent: Content) => void; // تابع بروزرسانی محتوا
 };
 
 // کامپوننت ContentList: نمایش لیست محتواها و مدیریت ویرایش محتوا
-export default function ContentList({ contents, onDelete }: ContentListProps) {
-  // حالت برای مدیریت محتوایی که در حال ویرایش است
+export default function ContentList({
+  contents,
+  onDelete,
+  onUpdateContent,
+}: ContentListProps) {
   const [editingContent, setEditingContent] = useState<Content | null>(null);
 
   return (
     <div className="space-y-4 p-4 border rounded-lg bg-slate-800 text-slate-50">
-      {/* اگر محتوایی در حال ویرایش باشد، فرم ویرایش نمایش داده می‌شود */}
       {editingContent ? (
         <EditContentForm
-          content={editingContent} // محتوایی که در حال ویرایش است
-          onCancel={() => setEditingContent(null)} // لغو ویرایش
+          content={editingContent}
+          onCancel={() => setEditingContent(null)}
+          onUpdateContent={(updatedContent) => {
+            // اضافه کردن مقدار `createdAt` از مقدار قبلی محتوا
+            onUpdateContent({
+              ...updatedContent,
+              createdAt: editingContent.createdAt,
+            });
+            setEditingContent(null);
+          }}
         />
       ) : (
         <>
-          {/* عنوان لیست محتواها */}
           <h1 className="text-xl font-bold">لیست محتواها</h1>
-
-          {/* لیست محتواها */}
           <ul className="space-y-4">
             {contents.map((content) => (
               <ContentItem
-                key={content.id} // کلید منحصر به فرد برای هر آیتم
-                content={content} // داده‌های محتوا
-                onEdit={() => setEditingContent(content)} // تابع ویرایش محتوا
-                onDelete={() => onDelete(content.id)} // تابع حذف محتوا
+                key={content.id}
+                content={content}
+                onEdit={() => setEditingContent(content)}
+                onDelete={() => onDelete(content.id)}
               />
             ))}
           </ul>

@@ -31,7 +31,7 @@ export async function GET() {
       deletedToday,
       totalDeleted,
     });
-  } catch (error) {
+  } catch {
     // در صورت بروز خطا، پیام خطا برگردانده می‌شود
     return NextResponse.json({ error: "خطا در دریافت آمار" }, { status: 500 });
   }
