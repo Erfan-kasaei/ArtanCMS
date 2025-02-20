@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-// تابع PATCH: ویرایش محتوای موجود
 export async function PATCH(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // تغییر نوع params به Promise
 ) {
   try {
-    const { id } = context.params; // استخراج `params` به‌عنوان یک شیء معمولی
+    const params = await context.params; // استفاده از await برای حل params
+    const { id } = params;
 
     if (!id) {
       return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 400 });
@@ -21,7 +21,8 @@ export async function PATCH(
     });
 
     return NextResponse.json(updatedContent);
-  } catch {
+  } catch (error) {
+    console.error("Error in PATCH:", error);
     return NextResponse.json({ error: "خطا در ویرایش محتوا" }, { status: 500 });
   }
 }
@@ -29,16 +30,18 @@ export async function PATCH(
 // تابع DELETE: حذف محتوا و ذخیره‌ی آن در آرشیو
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // تغییر نوع params به Promise
 ) {
   try {
-    const { id } = context.params; // استخراج `params` به‌عنوان یک شیء معمولی
+    const params = await context.params; // استفاده از await برای حل params
+    const { id } = params;
 
     if (!id) {
       return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 400 });
     }
 
     const content = await prisma.content.findUnique({ where: { id } });
+
     if (!content) {
       return NextResponse.json({ error: "محتوا یافت نشد" }, { status: 404 });
     }
@@ -53,7 +56,8 @@ export async function DELETE(
     await prisma.content.delete({ where: { id } });
 
     return NextResponse.json({ message: "محتوا حذف شد و در آرشیو ذخیره شد" });
-  } catch {
+  } catch (error) {
+    console.error("Error in DELETE:", error);
     return NextResponse.json({ error: "خطا در حذف محتوا" }, { status: 500 });
   }
 }
