@@ -45,7 +45,9 @@ export default function TrendLineChart({
     <Card className="p-2 bg-slate-950/40 border-none shadow-sky-700/20 shadow-2xl text-slate-50 h-80">
       {/* عنوان نمودار */}
       <CardHeader className="-mt-4">
-        <CardTitle className="text-xs font-light text-right">{title}</CardTitle>
+        <CardTitle className="text-xs font-light text-right">
+          {trendData ? title : <Skeleton className="h-4 w-48" />}
+        </CardTitle>
       </CardHeader>
 
       {/* محتوای نمودار */}
@@ -66,7 +68,6 @@ export default function TrendLineChart({
             >
               {/* خطوط شبکه‌ای */}
               <CartesianGrid vertical={false} />
-
               {/* محور X: نمایش تاریخ‌ها */}
               <XAxis
                 dataKey="date"
@@ -75,16 +76,13 @@ export default function TrendLineChart({
                 tickMargin={8}
                 tickFormatter={(value) => value.slice(0, 10)} // فرمت تاریخ
               />
-
               {/* محور Y: نمایش مقادیر */}
               <YAxis />
-
               {/* Tooltip: نمایش اطلاعات هنگام hover روی نمودار */}
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="dot" hideLabel />}
               />
-
               {/* Area: نمایش داده‌ها به صورت نمودار */}
               <Area
                 dataKey={type}
@@ -97,7 +95,12 @@ export default function TrendLineChart({
           </ChartContainer>
         ) : (
           // اگر داده‌ها وجود نداشته باشند، اسکلتون نمایش داده می‌شود
-          <Skeleton className="w-full" style={{ height: `${height}px` }} />
+          <div className="ml-10 flex flex-col gap-4">
+            {/* اسکلتون عنوان */}
+            <Skeleton className="h-4 w-44" />
+            {/* اسکلتون نمودار */}
+            <Skeleton className="w-full h-56 rounded-md" />
+          </div>
         )}
       </CardContent>
     </Card>

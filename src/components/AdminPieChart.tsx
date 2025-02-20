@@ -1,12 +1,13 @@
 "use client";
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // تعریف نوع Props برای کامپوننت
 type AdminPieChartProps = {
   title: string; // عنوان نمودار
-  value: number; // مقدار فعلی
-  total: number; // مقدار کل
+  value?: number; // مقدار فعلی (اختیاری)
+  total?: number; // مقدار کل (اختیاری)
   colors?: string[]; // رنگ‌های نمودار (پیش‌فرض: سبز و خاکستری)
 };
 
@@ -17,9 +18,26 @@ export default function AdminPieChart({
   total,
   colors = ["#4CAF50", "#E0E0E0"], // رنگ‌های پیش‌فرض: سبز و خاکستری
 }: AdminPieChartProps) {
+  // بررسی وجود داده‌ها
+  const hasData =
+    typeof value === "number" && typeof total === "number" && total > 0;
+
+  if (!hasData) {
+    // اگر داده‌ها وجود نداشته باشد، اسکلتون نمایش داده می‌شود
+    return (
+      <div className="p-4 text-center font-light">
+        {/* اسکلتون برای نمودار */}
+        <Skeleton className="w-full h-32 rounded-md mb-4" />
+        {/* اسکلتون برای خط افقی */}
+        <Skeleton className="h-1 w-2/3 mx-auto my-2 rounded-full" />
+        {/* اسکلتون برای عنوان */}
+        <Skeleton className="h-4 w-2/3 mx-auto" />
+      </div>
+    );
+  }
+
   // محاسبه درصد مقدار فعلی نسبت به مقدار کل
   const percentage = ((value / total) * 100).toFixed(1); // درصد با یک رقم اعشار
-
   // داده‌های نمودار
   const data = [
     { name: "Value", value }, // بخش مربوط به مقدار فعلی
@@ -48,7 +66,6 @@ export default function AdminPieChart({
               <Cell key={`cell-${index}`} fill={colors[index]} />
             ))}
           </Pie>
-
           {/* نمایش درصد در مرکز نیم‌دایره */}
           <text
             x="50%" // موقعیت افقی متن
@@ -61,13 +78,11 @@ export default function AdminPieChart({
           </text>
         </PieChart>
       </ResponsiveContainer>
-
       {/* خط افقی با رنگ بخش اصلی نمودار */}
       <div
         style={{ borderBottom: `4px solid ${colors[0]}` }} // رنگ خط مطابق با رنگ بخش اصلی
         className="my-2 mx-12"
       ></div>
-
       {/* عنوان نمودار */}
       <h3 className="text-sm mb-2">{title}</h3>
     </div>
